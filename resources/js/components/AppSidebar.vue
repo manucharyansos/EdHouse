@@ -14,6 +14,16 @@ const mainNavItems: NavItem[] = [
         href: '/dashboard',
         icon: LayoutGrid,
     },
+    {
+        title: 'Admin Create History',
+        href: '/admin/about/create',
+        icon: LayoutGrid,
+    },
+    {
+        title: 'Admin Create Services',
+        href: '/admin/services/create',
+        icon: LayoutGrid,
+    },
 ];
 
 const footerNavItems: NavItem[] = [

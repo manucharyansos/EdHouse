@@ -4,22 +4,25 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Contact Us -->
                 <div class="text-center md:text-left">
-                    <h3 class="text-lg font-semibold mb-4 text-white">Contact Us</h3>
-                    <p class="mb-2 text-white">+1 (409) 987-5874</p>
-                    <p class="mb-2 text-white">info@demolink.org</p>
-                    <p class="text-white">6036 Richmond Hwy, Alexandria, VA, 2230</p>
+                    <h3 class="text-lg font-semibold mb-4 text-white">Կապ մեզ հետ</h3>
+                    <p class="mb-2 text-white">
+                        <a href="tel:+37493031050" class="mb-2"
+                        ><strong>Հեռախոս:</strong> +37493031050</a>
+                    </p>
+                    <p class="mb-2 text-white">info@edhous.am</p>
+                    <p class="text-white">Զովունի</p>
                 </div>
 
                 <!-- Subscribe -->
                 <div class="text-center">
-                    <h3 class="text-lg font-semibold mb-4 text-white">Subscribe</h3>
-                    <p class="mb-2 text-white">Enter your e-mail to receive the latest news from us.</p>
+                    <h3 class="text-lg font-semibold mb-4 text-white">Բաժանորդագրվել</h3>
+                    <p class="mb-2 text-white">Մուտքագրեք ձեր էլ. փոստը՝ մեզանից վերջին նորությունները ստանալու համար:</p>
                     <form class="flex justify-center" @submit.prevent="handleSubmit">
                         <input
                             type="email"
                             v-model="email"
                             placeholder="Your E-mail"
-                            class="p-2 rounded-l-md text-black w-full md:w-auto"
+                            class="p-2 rounded-l-md text-white border-amber-100 w-full md:w-auto"
                         >
                         <button type="submit" class="bg-yellow-400 text-black p-2 rounded-r-md hover:bg-yellow-500">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -31,8 +34,8 @@
 
                 <!-- Social Links -->
                 <div class="text-center md:text-right">
-                    <h3 class="text-lg font-semibold mb-4 text-white">Social Links</h3>
-                    <p class="mb-2 text-white">Follow us on these social networks.</p>
+                    <h3 class="text-lg font-semibold mb-4 text-white">Սոցիալական հղումներ</h3>
+                    <p class="mb-2 text-white">Հետևեք մեզ այս սոցիալական ցանցերում։</p>
                     <div class="flex justify-center md:justify-end space-x-4">
                         <a href="#" class="text-white hover:text-blue-400">
                             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -45,13 +48,8 @@
                             </svg>
                         </a>
                         <a href="#" class="text-white hover:text-blue-400">
-                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M23.954 4.569c-.885.389-1.83.654-2.825.775 1.014-.611 1.794-1.574 2.163-2.723-.951.555-2.005.959-3.127 1.184-.896-.959-2.173-1.559-3.591-1.559-2.717 0-4.92 2.203-4.92 4.917 0 .39.045.765.127 1.124C7.691 8.094 4.066 6.13 1.64 3.161c-.427.722-.666 1.561-.666 2.475 0 1.71.87 3.213 2.188 4.096-.807-.026-1.566-.248-2.228-.616v.061c0 2.385 1.693 4.374 3.946 4.827-.413.111-.849.171-1.296.171-.314 0-.615-.03-.916-.086.631 1.953 2.445 3.377 4.604 3.417-1.68 1.319-3.809 2.105-6.102 2.105-.39 0-.779-.023-1.17-.067 2.189 1.394 4.768 2.209 7.557 2.209 9.054 0 14.01-7.496 14.01-13.986 0-.209 0-.42-.015-.63.961-.695 1.8-1.562 2.457-2.549z"/>
-                            </svg>
-                        </a>
-                        <a href="#" class="text-white hover:text-blue-400">
-                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M12.001 2.002c-5.522 0-9.999 4.477-9.999 9.999 0 4.99 3.656 9.126 8.437 9.879v-6.988h-2.54v-2.891h2.54V9.798c0-2.508 1.493-3.891 3.776-3.891 1.094 0 2.24.195 2.24.195v2.459h-1.264c-1.24 0-1.628.771-1.628 1.563v1.875h2.771l-.443 2.891h-2.328v6.988C18.344 21.129 22 16.992 22 12.001c0-5.522-4.477-9.999-9.999-9.999z"/>
+                            <svg class="w-7 h-7" fill="currentColor" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="120" height="120" viewBox="0 0 50 50">
+                                <path d="M25,2c12.703,0,23,10.297,23,23S37.703,48,25,48S2,37.703,2,25S12.297,2,25,2z M32.934,34.375	c0.423-1.298,2.405-14.234,2.65-16.783c0.074-0.772-0.17-1.285-0.648-1.514c-0.578-0.278-1.434-0.139-2.427,0.219	c-1.362,0.491-18.774,7.884-19.78,8.312c-0.954,0.405-1.856,0.847-1.856,1.487c0,0.45,0.267,0.703,1.003,0.966	c0.766,0.273,2.695,0.858,3.834,1.172c1.097,0.303,2.346,0.04,3.046-0.395c0.742-0.461,9.305-6.191,9.92-6.693	c0.614-0.502,1.104,0.141,0.602,0.644c-0.502,0.502-6.38,6.207-7.155,6.997c-0.941,0.959-0.273,1.953,0.358,2.351	c0.721,0.454,5.906,3.932,6.687,4.49c0.781,0.558,1.573,0.811,2.298,0.811C32.191,36.439,32.573,35.484,32.934,34.375z"></path>
                             </svg>
                         </a>
                     </div>

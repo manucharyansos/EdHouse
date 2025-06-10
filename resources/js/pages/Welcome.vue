@@ -30,32 +30,42 @@
     </div>
 
     <!-- Services Section -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 w-full">
-        <ServicesCard
-            paragraph="Վերափոխում"
-            img-url="/img/icon-tassels-57x57.webp"
-            text="Մեր փորձագետների թիմն ունի տների վերանորոգման տարիների փորձ՝ ներառյալ խոհանոցները, նկուղները և այլն:"
-            classes="bg-zinc-800"
-            @readMore="toRemodeling"
-        />
-        <ServicesCard
-            paragraph="Ինտերիերի դիզայն"
-            img-url="/img/icon-ruler-34x56.webp"
-            text="Մեր ինտերիերի դիզայնի ծառայությունները լավագույն միջոցն են տան դիզայն ստանալու համար, որը լիովին համապատասխանում է ձեզ և ձեր ապրելակերպին:"
-            classes="bg-zinc-900"
-        />
-        <ServicesCard
-            paragraph="Շինարարություն"
-            img-url="/img/icon-bulldozer-56x56.webp"
-            text="Մենք բարձրորակ շինարարական ծառայություններ ենք մատուցում էներգետիկայի, ջրի և հեռահաղորդակցության շուկաներին:"
-            classes="bg-zinc-800"
-        />
-        <ServicesCard
-            paragraph="Այլ ծառայություններ"
-            img-url="/img/icon-suitcase-63x49.webp"
-            text="Մենք առաջարկում ենք ավելի շատ ծառայություններ, քան որևէ այլ շինարարական ընկերություն։ Ծառայությունների ամբողջական ցանկը հասանելի է մեր կայքում։"
-            classes="bg-zinc-900"
-        />
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 w-full gap-4">
+        <div v-for="service in services" :key="service.id">
+            <ServicesCard
+                :paragraph="service.name"
+                :img-url="service.image_url"
+                :text="service.description"
+                classes="bg-zinc-800 h-full"
+                @readMore="toRemodeling(service)"
+            />
+        </div>
+
+<!--        <ServicesCard-->
+<!--            paragraph="Վերափոխում"-->
+<!--            img-url="/img/icon-tassels-57x57.webp"-->
+<!--            text="Մեր փորձագետների թիմն ունի տների վերանորոգման տարիների փորձ՝ ներառյալ խոհանոցները, նկուղները և այլն:"-->
+<!--            classes="bg-zinc-800"-->
+<!--            @readMore="toRemodeling"-->
+<!--        />-->
+<!--        <ServicesCard-->
+<!--            paragraph="Ինտերիերի դիզայն"-->
+<!--            img-url="/img/icon-ruler-34x56.webp"-->
+<!--            text="Մեր ինտերիերի դիզայնի ծառայությունները լավագույն միջոցն են տան դիզայն ստանալու համար, որը լիովին համապատասխանում է ձեզ և ձեր ապրելակերպին:"-->
+<!--            classes="bg-zinc-900"-->
+<!--        />-->
+<!--        <ServicesCard-->
+<!--            paragraph="Շինարարություն"-->
+<!--            img-url="/img/icon-bulldozer-56x56.webp"-->
+<!--            text="Մենք բարձրորակ շինարարական ծառայություններ ենք մատուցում էներգետիկայի, ջրի և հեռահաղորդակցության շուկաներին:"-->
+<!--            classes="bg-zinc-800"-->
+<!--        />-->
+<!--        <ServicesCard-->
+<!--            paragraph="Այլ ծառայություններ"-->
+<!--            img-url="/img/icon-suitcase-63x49.webp"-->
+<!--            text="Մենք առաջարկում ենք ավելի շատ ծառայություններ, քան որևէ այլ շինարարական ընկերություն։ Ծառայությունների ամբողջական ցանկը հասանելի է մեր կայքում։"-->
+<!--            classes="bg-zinc-900"-->
+<!--        />-->
     </div>
 
     <!-- About Us Section -->
@@ -254,6 +264,10 @@ export default {
         news: {
             type: Array,
             default: () => []
+        },
+        services: {
+            type: Array,
+            default: () => []
         }
     },
     data() {
@@ -278,10 +292,11 @@ export default {
         if (this.categories.length > 0) {
             this.activeCategory = this.categories[0].id;
         }
+        console.log(this.services, 'hfghf');
     },
     methods: {
-        toRemodeling() {
-            this.$inertia.get(route('about'));
+        toRemodeling(serviceId) {
+            this.$inertia.get(route('services.show', { service: serviceId }));
         },
         carouselPrev() {
             this.$refs.carousel.prev();

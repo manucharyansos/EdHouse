@@ -31,7 +31,7 @@
                 <div class="mobile-menu" :class="{ 'open': isMenuOpen, 'scrolled': isScrolled }" id="mobile-menu-2">
                     <ul class="flex flex-col mt-4 font-medium lg:flex-row lg:mt-0 text-lg font-sans italic">
                         <li>
-                            <Link :href="route('services')" @click="closeMenu">Ծառայություններ</Link>
+                            <Link :href="route('services.index')" @click="closeMenu">Ծառայություններ</Link>
                         </li>
                         <li>
                             <Link :href="route('about')" @click="closeMenu">Մեր մասին</Link>
