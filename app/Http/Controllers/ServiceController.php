@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Project;
 use App\Models\Service;
 use Illuminate\Http\Request;
+use Inertia\Response;
+use Inertia\ResponseFactory;
 
 class ServiceController extends Controller
 {
@@ -42,10 +45,12 @@ class ServiceController extends Controller
         return redirect()->route('admin.services.index')->with('success', 'Ծառայությունը ավելացվել է');
     }
 
-    public function show(Service $service)
+    public function show(Service $service): Response|ResponseFactory
     {
+        $projects = Project::get();
         return inertia('services/Show', [
-            'service' => $service
+            'service' => $service,
+            'projects' => $projects
         ]);
     }
 

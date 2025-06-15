@@ -1,5 +1,6 @@
 <template>
-    <header class="w-full header_section z-50" :class="{ 'scrolled': isScrolled }">
+    <header class="w-full header_section z-50 " :class="{ 'scrolled': isScrolled }">
+        <div id="particles-js" class="particles-bg"></div>
         <nav class="header w-full text-sm sticky top-0 px-4 lg:px-6 py-2.5 dark:bg-gray-800"
              :class="{ 'bg-opacity-100': isScrolled }">
             <div class="w-full flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
@@ -67,6 +68,12 @@ const closeMenu = () => {
 
 onMounted(() => {
     window.addEventListener('scroll', handleScroll);
+
+    if (window.particlesJS) {
+        particlesJS.load('particles-js', '/assets/particles.json', () => {
+            console.log('Particles.js loaded ✨');
+        });
+    }
 });
 
 onUnmounted(() => {
@@ -75,6 +82,21 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
+.particles-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100px; /* հարմարվող՝ այնքան, ինչքան քո header-ը */
+    z-index: -1;
+    opacity: 0.6;
+    pointer-events: none;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.header_section.scrolled .particles-bg {
+    opacity: 0.9;
+}
 .header_section {
     position: fixed;
     top: 0;

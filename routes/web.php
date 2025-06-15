@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\Admin\ContactMessageController;
 use App\Http\Controllers\BackgroundImageController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NewsController;
@@ -13,7 +15,7 @@ use Inertia\Inertia;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/contact', function () {
-return Inertia::render('Contact');
+return Inertia::render('contact/index');
 })->name('contact');
 
 // Public services route
@@ -21,15 +23,20 @@ Route::get('/services', [ServiceController::class, 'index'])->name('services.ind
 Route::get('/services/{service}', [ServiceController::class, 'show'])->name('services.show');
 Route::get('/about', [HistoryController::class, 'index'])->name('about');
 Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index');
+Route::get('/projects/{project}', [ProjectController::class, 'show'])->name('projects.show');
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
 Route::get('/news', [NewsController::class, 'index'])->name('news.index');
+Route::post('/contact', [ContactController::class, 'store']);
 
 Route::get('/dashboard', function () {
 return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 // Admin routes for History management
-Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
+Route::middleware(['auth', 'admin', 'verified'])->prefix('admin')->group(function () {
+    Route::get('/contact-messages', [ContactMessageController::class, 'index'])
+        ->name('admin.contact-messages')
+        ->middleware('auth');
 //    Route::get('/history/create', [HistoryController::class, 'create'])->name('history.create');
 //    Route::post('/history', [HistoryController::class, 'store'])->name('history.store');
 //    Route::get('/history/{history}/edit', [HistoryController::class, 'edit'])->name('history.edit');
@@ -49,7 +56,6 @@ Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
     Route::get('/projects/create', [ProjectController::class, 'create'])->name('projects.create');
     Route::post('/projects', [ProjectController::class, 'store'])->name('projects.store');
     Route::get('/projects/{project}/edit', [ProjectController::class, 'edit'])->name('projects.edit');
-    Route::get('/projects/{project}', [ProjectController::class, 'show'])->name('projects.show');
     Route::put('/projects/{project}', [ProjectController::class, 'update'])->name('projects.update');
     Route::delete('/projects/{project}', [ProjectController::class, 'destroy'])->name('projects.destroy');
     Route::get('/news/create', [NewsController::class, 'create'])->name('news.create');

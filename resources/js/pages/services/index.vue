@@ -10,8 +10,11 @@
                 :key="service.id"
                 class="service-card"
             >
-                <div class="service-header">
-                    <h2>{{ service.name.toUpperCase() }}</h2>
+                <div class="service-header ">
+                    <Link :href="route('services.show', { service: service.id })">
+                        <h2 class="text-neutral-800 hover:text-red-900">{{ service.name.toUpperCase() }}</h2>
+                    </Link>
+
                     <div class="divider"></div>
                 </div>
 
@@ -84,6 +87,9 @@ body {
     color: #444;
     margin: 0 0 0.5rem 0;
     text-align: center;
+}
+.service-header h2:hover {
+    color: #f53003;
 }
 
 .divider {

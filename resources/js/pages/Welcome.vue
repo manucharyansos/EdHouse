@@ -40,32 +40,6 @@
                 @readMore="toRemodeling(service)"
             />
         </div>
-
-<!--        <ServicesCard-->
-<!--            paragraph="Վերափոխում"-->
-<!--            img-url="/img/icon-tassels-57x57.webp"-->
-<!--            text="Մեր փորձագետների թիմն ունի տների վերանորոգման տարիների փորձ՝ ներառյալ խոհանոցները, նկուղները և այլն:"-->
-<!--            classes="bg-zinc-800"-->
-<!--            @readMore="toRemodeling"-->
-<!--        />-->
-<!--        <ServicesCard-->
-<!--            paragraph="Ինտերիերի դիզայն"-->
-<!--            img-url="/img/icon-ruler-34x56.webp"-->
-<!--            text="Մեր ինտերիերի դիզայնի ծառայությունները լավագույն միջոցն են տան դիզայն ստանալու համար, որը լիովին համապատասխանում է ձեզ և ձեր ապրելակերպին:"-->
-<!--            classes="bg-zinc-900"-->
-<!--        />-->
-<!--        <ServicesCard-->
-<!--            paragraph="Շինարարություն"-->
-<!--            img-url="/img/icon-bulldozer-56x56.webp"-->
-<!--            text="Մենք բարձրորակ շինարարական ծառայություններ ենք մատուցում էներգետիկայի, ջրի և հեռահաղորդակցության շուկաներին:"-->
-<!--            classes="bg-zinc-800"-->
-<!--        />-->
-<!--        <ServicesCard-->
-<!--            paragraph="Այլ ծառայություններ"-->
-<!--            img-url="/img/icon-suitcase-63x49.webp"-->
-<!--            text="Մենք առաջարկում ենք ավելի շատ ծառայություններ, քան որևէ այլ շինարարական ընկերություն։ Ծառայությունների ամբողջական ցանկը հասանելի է մեր կայքում։"-->
-<!--            classes="bg-zinc-900"-->
-<!--        />-->
     </div>
 
     <!-- About Us Section -->
@@ -155,7 +129,7 @@
                                         :alt="project.name"
                                         class="project-image w-full"
                                     />
-                                    <div class="project-content absolute top-0 z-10 border border-black p-5">
+                                    <div class="project-content absolute top-0 z-10 p-5">
                                         <h3 class="text-lg font-bold italic font-sans">{{ project.name }}</h3>
                                         <p class="mt-2 line-clamp-2 text-gray-200 text-center">{{ project.description }}</p>
                                         <div class="mt-4 flex flex-wrap gap-2">

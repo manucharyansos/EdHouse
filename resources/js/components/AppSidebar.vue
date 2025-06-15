@@ -17,26 +17,18 @@ const mainNavItems: NavItem[] = [
     {
         title: 'Admin Create History',
         href: '/admin/about/create',
-        icon: LayoutGrid,
+        icon: BookOpen,
     },
     {
         title: 'Admin Create Services',
         href: '/admin/services/create',
-        icon: LayoutGrid,
-    },
-];
-
-const footerNavItems: NavItem[] = [
-    {
-        title: 'Github Repo',
-        href: 'https://github.com/laravel/vue-starter-kit',
-        icon: Folder,
-    },
-    {
-        title: 'Documentation',
-        href: 'https://laravel.com/docs/starter-kits#vue',
         icon: BookOpen,
     },
+    {
+        title: 'Contact Messages',
+        href: '/admin/contact-messages',
+        icon: LayoutGrid,
+    }
 ];
 </script>
 
