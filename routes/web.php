@@ -28,20 +28,16 @@ Route::get('/categories', [CategoryController::class, 'index'])->name('categorie
 Route::get('/news', [NewsController::class, 'index'])->name('news.index');
 Route::post('/contact', [ContactController::class, 'store']);
 
-Route::get('/dashboard', function () {
-return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/admin', function () {
+return Inertia::render('Admin');
+})->middleware(['auth', 'verified'])->name('admin');
 
 // Admin routes for History management
 Route::middleware(['auth', 'admin', 'verified'])->prefix('admin')->group(function () {
     Route::get('/contact-messages', [ContactMessageController::class, 'index'])
         ->name('admin.contact-messages')
         ->middleware('auth');
-//    Route::get('/history/create', [HistoryController::class, 'create'])->name('history.create');
-//    Route::post('/history', [HistoryController::class, 'store'])->name('history.store');
-//    Route::get('/history/{history}/edit', [HistoryController::class, 'edit'])->name('history.edit');
-//    Route::put('/history/{history}', [HistoryController::class, 'update'])->name('history.update');
-//    Route::delete('/history/{history}', [HistoryController::class, 'destroy'])->name('history.destroy');
+    Route::get('/history', [HistoryController::class, 'adminIndex'])->name('admin.history.index');
     Route::get('/about/create', [HistoryController::class, 'create'])->name('admin.history.create');
     Route::post('/about', [HistoryController::class, 'store'])->name('admin.history.store');
     Route::get('/about/{history}/edit', [HistoryController::class, 'edit'])->name('admin.history.edit');

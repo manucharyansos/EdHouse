@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use App\Models\Service;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Response;
 use Inertia\ResponseFactory;
 
@@ -65,15 +66,26 @@ class ServiceController extends Controller
         $validated = $request->validate([
             'name' => 'required|string',
             'description' => 'required|string',
-            'svg' => 'nullable|file|mimes:jpeg,png,jpg,svg,image/svg+xml|max:2048',
+            'svg' => 'nullable|file|mimes:jpeg,png,jpg,svg|max:2048',
         ]);
 
+        $service = Service::findOrFail($service);
+
+        $updateData = [
+            'name' => $validated['name'],
+            'description' => $validated['description'],
+        ];
+
         if ($request->hasFile('svg')) {
-            $validated['svg'] = $request->file('svg')->store('services_svg', 'public');
+            // Delete old file if it exists
+            if ($service->svg) {
+                Storage::disk('public')->delete($service->svg);
+            }
+            $updateData['svg'] = $request->file('svg')->store('services_svg', 'public');
         }
 
-        $service = Service::findOrFail($service);
-        $service->update($validated);
+        $service->update($updateData);
+
         return redirect()->route('admin.services.index')->with('success', 'Ծառայությունը թարմացվել է');
     }
 

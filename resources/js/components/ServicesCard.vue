@@ -4,7 +4,7 @@
             <div class="transition-all duration-500 ease-out group-hover:translate-y-8 h-40 w-20 flex items-center justify-center">
                 <img :src="imgUrl" class="size-20 object-cover mask-radial-at-center" alt="">
             </div>
-            <h2 class="text-3xl h-12 text-center italic font-meno font-bold">
+            <h2 class="text-3xl h-12 text-center italic font-meno font-bold text-white">
                 {{ paragraph }}
             </h2>
             <p class="text-base text-gray-400 h-32 text-center">

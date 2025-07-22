@@ -6,7 +6,7 @@
             <div class="w-full flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
                 <div class="float-left">
                     <Link :href="route('home')">
-                        <img src="/img/logo-inverse-115x62.webp" alt="Logo" class="h-15" />
+                        <img src="/img/photo_2025-07-05_12-45-41.jpg" alt="Logo" class="h-20 rounded-3xl" />
                     </Link>
                 </div>
 

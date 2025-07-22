@@ -72,7 +72,8 @@
 
                         <div class="mb-6">
                             <h4 class="font-bold text-sm mb-1">ՀԵՌԱԽՈՍ</h4>
-                            <p class="text-gray-700"><i class="fas fa-phone-alt text-orange-500 mr-2"></i>1-800-1234-567</p>
+                            <p class="text-gray-700"><i class="fas fa-phone-alt text-orange-500 mr-2"></i>077 22 06 28</p>
+                            <p class="text-gray-700"><i class="fas fa-phone-alt text-orange-500 mr-2"></i>055 03 03 89</p>
                         </div>
 
                         <div class="mb-6">
@@ -84,7 +85,7 @@
                             <h4 class="font-bold text-sm mb-1">ՀԱՍՑԵ</h4>
                             <p class="text-gray-700">
                                 <i class="fas fa-map-marker-alt text-orange-500 mr-2"></i>
-                                6036 Richmond hwy,<br /> Alexandria, VA, 2230
+                                Կոտայքի մարզ,<br /> Զովունի, 27 փ 
                             </p>
                         </div>
                     </div>

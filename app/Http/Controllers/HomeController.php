@@ -23,7 +23,7 @@ class HomeController extends Controller
         $news = News::latest()->take(3)->get();
         $services = Service::all();
 
-        return Inertia::render('Welcome', [
+        return Inertia::render('Home', [
             'projects' => $projects,
             'categories' => $categories,
             'backgroundImage' => $backgroundImage ? asset($backgroundImage->image_url) : asset('/img/header-bg-parallax-01-1922x1030.jpg'),
@@ -33,12 +33,4 @@ class HomeController extends Controller
         ]);
     }
 
-    public function bgVideo(): Response
-    {
-        $backgroundVideo = BackgroundVideo::latest()->first();
-
-        return Inertia::render('Welcome', [
-            'backgroundVideo' => $backgroundVideo ? asset($backgroundVideo->video_url) : asset('/videos/default-video.mp4'),
-        ]);
-    }
 }

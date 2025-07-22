@@ -41,7 +41,7 @@
                                     :alt="project.name"
                                     class="project-image w-full"
                                 />
-                                <div class="project-content absolute top-0 z-10 border p-5">
+                                <div class="project-content absolute top-0 z-10 p-5">
                                     <h3 class="text-lg font-bold italic font-sans">{{ project.name }}</h3>
                                     <p class="mt-2 line-clamp-2 text-gray-200 text-center">{{ project.description }}</p>
                                     <div class="mt-4 flex flex-wrap gap-2">

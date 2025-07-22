@@ -1,6 +1,6 @@
 <template>
     <div class="about_page">
-        <div class="h-[100px] bg-neutral-800">
+        <div class="h-[100px] bg-transperent">
             <HeaderComponent />
         </div>
 
@@ -12,7 +12,7 @@
             <div class="container max-w-5xl px-4 py-12">
                 <h2 class="text-3xl font-bold mb-8">Մեր Պատմությունը</h2>
 
-                <div class="relative border-l-4 border-orange-400 pl-6">
+                <div class="relative border-l-4 border-orange-400 pl-8">
                     <div
                         v-for="(items, title) in sections"
                         :key="title"
@@ -20,7 +20,7 @@
                     >
                         <div v-for="item in items" :key="item.id" class="group flex flex-col md:flex-row mb-12">
                             <!-- Year -->
-                            <div class="absolute -left-14 top-2 text-lg font-bold text-gray-700 w-12">
+                            <div class="absolute -left-14 top-0 text-lg font-bold bg-white text-gray-700 w-12">
                                 {{ item.year }}
                             </div>
 
@@ -40,11 +40,6 @@
                     </div>
                 </div>
 
-                <div class="mt-12 flex justify-between font-bold text-sm text-gray-600">
-                    <span>TESTIMONIALS</span>
-                    <span>OUR TEAM</span>
-                    <span>COMMUNITY INVOLVEMENT</span>
-                </div>
 
                 <div v-if="$page.props.auth.user" class="mt-8 text-right">
                     <Link :href="route('admin.history.create')" class="btn btn-primary">

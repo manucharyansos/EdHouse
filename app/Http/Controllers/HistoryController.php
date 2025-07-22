@@ -27,6 +27,17 @@ class HistoryController extends Controller
             'sections' => $sections,
         ]);
     }
+    /**
+     * Display the history section on About page.
+     */
+    public function adminIndex(): \Inertia\Response
+    {
+        $histories = History::orderBy('year')->get();
+
+        return Inertia::render('admin/history/index', [
+            'histories' => $histories,
+        ]);
+    }
 
     /**
      * Show the form for creating a new history item (admin only).
@@ -83,7 +94,6 @@ class HistoryController extends Controller
         $data = $request->all();
 
         if ($request->hasFile('image')) {
-            // Delete old image if exists
             if ($history->image) {
                 Storage::disk('public')->delete($history->image);
             }
@@ -92,7 +102,7 @@ class HistoryController extends Controller
 
         $history->update($data);
 
-        return redirect()->route('about.index')->with('success', 'History item updated successfully.');
+        return redirect()->route('admin/history/index')->with('success', 'History item updated successfully.');
     }
 
     /**

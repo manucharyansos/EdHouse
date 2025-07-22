@@ -10,25 +10,43 @@ import AppLogo from './AppLogo.vue';
 
 const mainNavItems: NavItem[] = [
     {
-        title: 'Dashboard',
-        href: '/dashboard',
+        title: 'Admin',
+        href: '/admin',
         icon: LayoutGrid,
     },
     {
-        title: 'Admin Create History',
-        href: '/admin/about/create',
+        title: 'History',
         icon: BookOpen,
+        items: [
+            {
+                title: 'History Page',
+                href: '/admin/history',
+            },
+            {
+                title: 'Create History',
+                href: '/admin/about/create',
+            },
+        ],
     },
     {
-        title: 'Admin Create Services',
-        href: '/admin/services/create',
-        icon: BookOpen,
+        title: 'Services',
+        icon: Folder,
+        items: [
+            {
+                title: 'Services Page',
+                href: '/admin/services/admin',
+            },
+            {
+                title: 'Create Services',
+                href: '/admin/services/create',
+            },
+        ],
     },
     {
         title: 'Contact Messages',
         href: '/admin/contact-messages',
         icon: LayoutGrid,
-    }
+    },
 ];
 </script>
 
@@ -38,7 +56,7 @@ const mainNavItems: NavItem[] = [
             <SidebarMenu>
                 <SidebarMenuItem>
                     <SidebarMenuButton size="lg" as-child>
-                        <Link :href="route('dashboard')">
+                        <Link :href="route('admin')">
                             <AppLogo />
                         </Link>
                     </SidebarMenuButton>
