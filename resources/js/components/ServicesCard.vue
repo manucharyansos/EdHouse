@@ -7,7 +7,7 @@
             <h2 class="text-3xl h-12 text-center italic font-meno font-bold text-white">
                 {{ paragraph }}
             </h2>
-            <p class="text-base text-gray-400 h-32 text-center overflow-visible">
+            <p class="text-base text-gray-400 h-32 text-center overflow-x-auto">
                 {{ text }}
             </p>
         </div>

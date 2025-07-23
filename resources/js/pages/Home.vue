@@ -5,7 +5,7 @@
     </Head>
     <HeaderComponent />
     <!-- Hero Section -->
-    <div class="home_page flex min-h-screen flex-col items-center bg-gray-50" :style="{ backgroundImage: `url(${backgroundImage})` }">
+    <div class="home_page flex min-h-screen flex-col items-center bg-gray-50 px-4" :style="{ backgroundImage: `url(${backgroundImage})` }">
         <div class="container mx-auto px-4 flex-grow flex items-center">
             <main class="w-full">
                 <div class="grid grid-cols-1 lg:grid-cols-2 items-center">

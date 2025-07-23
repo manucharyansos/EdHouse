@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-col bg-amber-50 min-h-screen">
+    <div class="flex flex-col bg-amber-50 min-h-screen px-4">
         <!-- Header -->
         <HeaderComponent class="w-full" />
 

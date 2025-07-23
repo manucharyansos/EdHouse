@@ -3,12 +3,12 @@
     <div class="bg-image flex items-center justify-center w-full h-80">
         <h1 class="text-4xl text-amber-50 font-extrabold font-sans italic">Ծառայություններ</h1>
     </div>
-    <div class="services-container bg-amber-50 flex items-center justify-center flex-col">
-        <div class="services-grid">
+    <div class="services-container bg-amber-50 flex items-center justify-center flex-row mx-2 px-4">
+        <div class="services-grid flex flex-row items-center justify-center flex-wrap gap-4 w-full">
             <div
                 v-for="service in services"
                 :key="service.id"
-                class="service-card"
+                class="service-card w-80 h-96"
             >
                 <div class="service-header ">
                     <Link :href="route('services.show', { service: service.id })">
@@ -20,7 +20,7 @@
 
                 <div class="service-content">
                     <img class="icon-wrapper size-28 object-cover" :src="service.image_url" alt="">
-                    <p>{{ service.description }}</p>
+                    <p class="overflow-x-auto h-32">{{ service.description }}</p>
                 </div>
 
             </div>
@@ -59,15 +59,6 @@ body {
     padding: 2rem;
     font-family: Arial, sans-serif;
     min-height: 70vh;
-}
-
-.services-grid {
-    max-width: 1200px;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-    gap: 2rem;
-    margin-bottom: 2rem;
-    width: 100%;
 }
 
 .service-card {

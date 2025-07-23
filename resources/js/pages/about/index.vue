@@ -1,5 +1,5 @@
 <template>
-    <div class="about_page">
+    <div class="about_page px-4">
         <div class="h-[100px] bg-transparent">
             <HeaderComponent />
         </div>

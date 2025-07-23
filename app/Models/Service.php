@@ -13,6 +13,9 @@ class Service extends Model
 
     public function getImageUrlAttribute(): ?string
     {
-        return $this->svg ? asset('storage/' . $this->svg) : asset('/project-04-420x357.jpg');
+        if ($this->svg && file_exists(public_path('storage/' . $this->svg))) {
+            return url('storage/' . $this->svg);
+        }
+        return url('project-04-420x357.jpg');
     }
 }
