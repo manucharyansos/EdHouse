@@ -30,7 +30,7 @@
     </div>
 
     <!-- Services Section -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 w-full gap-4">
+    <div class="flex flex-row flex-wrap items-center justify-center w-full gap-4 bg-white pt-12">
         <div v-for="service in services" :key="service.id">
             <ServicesCard
                 :paragraph="service.name"
@@ -266,7 +266,6 @@ export default {
         if (this.categories.length > 0) {
             this.activeCategory = this.categories[0].id;
         }
-        console.log(this.services, 'hfghf');
     },
     methods: {
         toRemodeling(serviceId) {

@@ -1,6 +1,6 @@
 <template>
     <div class="about_page">
-        <div class="h-[100px] bg-transperent">
+        <div class="h-[100px] bg-transparent">
             <HeaderComponent />
         </div>
 

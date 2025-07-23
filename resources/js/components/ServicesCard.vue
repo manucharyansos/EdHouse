@@ -1,5 +1,5 @@
 <template>
-    <div class="relative h-84 flex flex-col items-center justify-center group overflow-hidden" :class="classes">
+    <div class="relative w-80 h-84 flex flex-col items-center justify-center group overflow-hidden p-3" :class="classes">
         <div class="flex flex-col items-center justify-center transition-all duration-500 ease-out group-hover:-translate-y-8">
             <div class="transition-all duration-500 ease-out group-hover:translate-y-8 h-40 w-20 flex items-center justify-center">
                 <img :src="imgUrl" class="size-20 object-cover mask-radial-at-center" alt="">
@@ -7,7 +7,7 @@
             <h2 class="text-3xl h-12 text-center italic font-meno font-bold text-white">
                 {{ paragraph }}
             </h2>
-            <p class="text-base text-gray-400 h-32 text-center">
+            <p class="text-base text-gray-400 h-32 text-center overflow-visible">
                 {{ text }}
             </p>
         </div>

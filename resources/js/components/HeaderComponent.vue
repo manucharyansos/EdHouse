@@ -6,7 +6,7 @@
             <div class="w-full flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
                 <div class="float-left">
                     <Link :href="route('home')">
-                        <img src="/img/photo_2025-07-05_12-45-41.jpg" alt="Logo" class="h-20 rounded-3xl" />
+                        <img src="/favicon.ico" alt="Logo" class="h-20 rounded-3xl" />
                     </Link>
                 </div>
 
@@ -38,7 +38,7 @@
                             <Link :href="route('about')" @click="closeMenu">Մեր մասին</Link>
                         </li>
                         <li>
-                            <Link :href="route('contact')" @click="closeMenu">Կապ մեր հետ</Link>
+                            <Link :href="route('contact')" @click="closeMenu">Կապ մեզ հետ</Link>
                         </li>
                     </ul>
                 </div>
