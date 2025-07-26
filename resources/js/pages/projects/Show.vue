@@ -20,27 +20,19 @@
 
             <!-- Images Block -->
             <div class="order-1 lg:order-2">
-                <img :src="selectedImage" class="w-full h-[200px] sm:h-[300px] md:h-[350px] lg:h-[400px] object-cover rounded mb-3 sm:mb-4" />
+                <img :src="selectedImage" class="w-full h-[200px] sm:h-[300px] md:h-[350px] lg:h-[400px] object-cover rounded mb-3 sm:mb-4"  alt=""/>
                 <div class="relative">
-                    <button @click="scrollLeft"
-                            class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white p-1 sm:p-2 shadow rounded z-10 text-sm sm:text-base">
-                        ‹
-                    </button>
-                    <div ref="carousel" class="flex gap-2 sm:gap-3 md:gap-4 overflow-x-auto no-scrollbar px-8 sm:px-10">
+                    <div ref="carousel" class="flex items-center justify-center gap-2 sm:gap-3 md:gap-4 overflow-x-auto no-scrollbar px-8 sm:px-10">
                         <div
                             v-for="image in project.images"
                             :key="image.id"
-                            class="w-20 h-14 sm:w-24 sm:h-16 md:w-28 md:h-20 border-2 rounded overflow-hidden cursor-pointer flex-shrink-0"
+                            class="w-16 h-10 sm:w-24 sm:h-12 md:w-24 md:h-16 border-2 rounded overflow-hidden cursor-pointer flex-shrink-0"
                             :class="selectedImage === image.image_url ? 'border-yellow-400' : 'border-transparent'"
                             @click="selectedImage = image.image_url"
                         >
                             <img :src="image.image_url" class="w-full h-full object-cover" alt="" />
                         </div>
                     </div>
-                    <button @click="scrollRight"
-                            class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white p-1 sm:p-2 shadow rounded z-10 text-sm sm:text-base">
-                        ›
-                    </button>
                 </div>
             </div>
         </div>

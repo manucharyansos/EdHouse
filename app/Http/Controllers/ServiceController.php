@@ -11,19 +11,19 @@ use Inertia\ResponseFactory;
 
 class ServiceController extends Controller
 {
-    public function index()
+    public function index(): Response|ResponseFactory
     {
         $services = Service::all();
         return inertia('services/index', ['services' => $services]);
     }
 
-    public function adminIndex()
+    public function adminIndex(): Response|ResponseFactory
     {
         $services = Service::all();
         return inertia('admin/services/index', ['services' => $services]);
     }
 
-    public function create()
+    public function create(): Response|ResponseFactory
     {
         return inertia('admin/services/Create');
     }
@@ -31,18 +31,22 @@ class ServiceController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'svg' => 'required|image|mimes:jpeg,png,jpg,svg|max:2048',
+            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
             'name' => 'required|string',
             'description' => 'required|string',
         ]);
 
-        $data = $request->only(['svg', 'name', 'description']);
-
-        if ($request->hasFile('svg')) {
-            $data['svg'] = $request->file('svg')->store('services_svg', 'public');
+        $imageData = null;
+        if ($request->hasFile('image')) {
+            $imageData = base64_encode(file_get_contents($request->file('image')->path()));
         }
 
-        Service::create($data);
+        Service::create([
+            'name' => $request->name,
+            'description' => $request->description,
+            'image_data' => $imageData
+        ]);
+
         return redirect()->route('admin.services.index')->with('success', 'Ծառայությունը ավելացվել է');
     }
 
@@ -55,7 +59,7 @@ class ServiceController extends Controller
         ]);
     }
 
-    public function edit($service)
+    public function edit($service): Response|ResponseFactory
     {
         $service = Service::findOrFail($service);
         return inertia('admin/services/Edit', ['service' => $service]);
@@ -66,32 +70,27 @@ class ServiceController extends Controller
         $validated = $request->validate([
             'name' => 'required|string',
             'description' => 'required|string',
-            'svg' => 'nullable|file|mimes:jpeg,png,jpg,svg|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
         $service = Service::findOrFail($service);
+        $data = $request->only(['name', 'description']);
 
-        $updateData = [
-            'name' => $validated['name'],
-            'description' => $validated['description'],
-        ];
-
-        if ($request->hasFile('svg')) {
-            // Delete old file if it exists
-            if ($service->svg) {
-                Storage::disk('public')->delete($service->svg);
-            }
-            $updateData['svg'] = $request->file('svg')->store('services_svg', 'public');
+        if ($request->hasFile('image')) {
+            $data['image_data'] = base64_encode(file_get_contents($request->file('image')->path()));
         }
 
-        $service->update($updateData);
+        $service->update($data);
 
         return redirect()->route('admin.services.index')->with('success', 'Ծառայությունը թարմացվել է');
     }
 
-    public function destroy($service)
+    public function destroy($service): \Illuminate\Http\RedirectResponse
     {
         $service = Service::findOrFail($service);
+        if ($service->image) {
+            Storage::disk('public')->delete($service->image);
+        }
         $service->delete();
         return redirect()->route('admin.services.index')->with('success', 'Ծառայությունը ջնջվել է');
     }

@@ -1,10 +1,10 @@
 <template>
-    <div class="about_page px-4">
+    <div class="about_page">
         <div class="h-[100px] bg-transparent">
             <HeaderComponent />
         </div>
 
-        <main class="flex flex-col items-center bg-white">
+        <main class="flex flex-col items-center bg-white px-4">
             <div class="about_bg_img w-full h-80 flex items-center justify-center">
                 <h1 class="text-5xl font-extrabold italic text-white">Մեր մասին</h1>
             </div>

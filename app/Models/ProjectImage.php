@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectImage extends Model
 {
@@ -16,8 +17,11 @@ class ProjectImage extends Model
         return $this->belongsTo(Project::class);
     }
 
-    public function getImageUrlAttribute(): string
+    public function getImageUrlAttribute(): ?string
     {
-        return $this->url ? asset('img/' . $this->url) : asset('img/default-project.jpg');
+        if ($this->image && Storage::disk('public')->exists($this->image)) {
+            return url('storage/' . $this->image);
+        }
+        return asset('images/default-service.jpg');
     }
 }

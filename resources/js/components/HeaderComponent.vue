@@ -1,12 +1,12 @@
 <template>
-    <header class="w-full header_section z-50 " :class="{ 'scrolled': isScrolled }">
+    <header class="w-full header_section z-40 " :class="{ 'scrolled': isScrolled }">
         <div id="particles-js" class="particles-bg"></div>
         <nav class="header w-full text-sm sticky top-0 px-4 lg:px-6 py-2.5 dark:bg-gray-800"
              :class="{ 'bg-opacity-100': isScrolled }">
             <div class="w-full flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
                 <div class="float-left">
                     <Link :href="route('home')">
-                        <img src="/favicon.ico" alt="Logo" class="h-20 rounded-3xl" />
+                        <img src="/logo.png" alt="Logo" class="h-20 rounded-3xl" />
                     </Link>
                 </div>
 

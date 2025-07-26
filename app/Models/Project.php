@@ -24,6 +24,10 @@ class Project extends Model
 
     public function getImageUrlAttribute(): ?string
     {
-        return $this->image ? asset('img/' . $this->image) : asset('img/default-project.jpg');
+        if ($this->image && file_exists(public_path('storage/app/public/' . $this->image))) {
+            return url('storage/app/public/' . $this->image);
+        }
+        return asset('images/default-service.jpg');
     }
+
 }

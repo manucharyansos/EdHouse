@@ -3,19 +3,17 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Service extends Model
 {
-    protected $fillable = ['svg', 'name', 'description'];
+    protected $fillable = ['name', 'description', 'image_data'];
 
-    protected $appends = ['image_url'];
-//
-
-    public function getImageUrlAttribute(): ?string
-    {
-        if ($this->svg && file_exists(public_path('storage/' . $this->svg))) {
-            return url('storage/' . $this->svg);
-        }
-        return url('project-04-420x357.jpg');
-    }
+//    public function getImageUrlAttribute(): string
+//    {
+//        if ($this->image && Storage::disk('public')->exists($this->image)) {
+//            return Storage::disk('public')->url($this->image);
+//        }
+//        return asset('images/default-service.jpg');
+//    }
 }

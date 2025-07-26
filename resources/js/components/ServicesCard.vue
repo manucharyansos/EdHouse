@@ -1,13 +1,13 @@
 <template>
-    <div class="relative w-80 h-84 flex flex-col items-center justify-center group overflow-hidden p-3" :class="classes">
-        <div class="flex flex-col items-center justify-center transition-all duration-500 ease-out group-hover:-translate-y-8">
-            <div class="transition-all duration-500 ease-out group-hover:translate-y-8 h-40 w-20 flex items-center justify-center">
+    <div class="relative w-80 h-84 flex flex-col items-center justify-center group overflow-hidden bg-white" :class="classes">
+        <div class="flex flex-col items-center justify-center bg-neutral-600 w-full transition-all duration-500 ease-out group-hover:-translate-y-8">
+            <div class="transition-all duration-500 ease-out group-hover:translate-y-8 h-40 w-full flex items-center justify-center">
                 <img :src="imgUrl" class="size-20 object-cover mask-radial-at-center" alt="">
             </div>
             <h2 class="text-3xl h-12 text-center italic font-meno font-bold text-white">
                 {{ paragraph }}
             </h2>
-            <p class="text-base text-gray-400 h-32 text-center overflow-x-auto">
+            <p class="text-base text-gray-400 h-32 text-center overflow-y-auto p-2">
                 {{ text }}
             </p>
         </div>

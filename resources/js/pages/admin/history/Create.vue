@@ -21,7 +21,7 @@
 
             <div class="mb-6">
                 <label class="block mb-2 text-sm font-medium text-gray-700">Պատկեր</label>
-                <input type="file" class="w-full p-2 border bg-neutral-800 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" accept="image/*" @change="onFileChange">
+                <input type="file" name="image" class="w-full p-2 border bg-neutral-800 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" accept="image/*" @change="onFileChange">
             </div>
 
             <button type="submit" class="w-full py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">Ավելացնել</button>

@@ -20,7 +20,7 @@
 
                 <div class="service-content">
                     <img class="icon-wrapper size-28 object-cover" :src="service.image_url" alt="">
-                    <p class="overflow-x-auto h-32">{{ service.description }}</p>
+                    <p class="overflow-y-auto h-32">{{ service.description }}</p>
                 </div>
 
             </div>

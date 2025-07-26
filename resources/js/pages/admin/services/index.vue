@@ -1,19 +1,20 @@
 <template>
-    <HeaderComponent/>
-    <div class="bg-image flex items-center justify-center w-full h-80 relative">
-        <h1 class="text-4xl text-amber-50 font-extrabold font-sans italic">Ծառայություններ</h1>        <Link :href="route('admin')" class="absolute top-32 right-10 z-50">
+<!--    <HeaderComponent/>-->
+    <div class="bg-image flex items-center justify-center w-full h-80 relative z-50">
+        <h1 class="text-4xl text-amber-50 font-extrabold font-sans italic">Ծառայություններ</h1>
+        <Link :href="route('admin')" class="absolute top-8 right-10 z-50">
         <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="30" fill="red" viewBox="0 0 50 50">
             <path d="M 25 2 C 12.309534 2 2 12.309534 2 25 C 2 37.690466 12.309534 48 25 48 C 37.690466 48 48 37.690466 48 25 C 48 12.309534 37.690466 2 25 2 z M 25 4 C 36.609534 4 46 13.390466 46 25 C 46 36.609534 36.609534 46 25 46 C 13.390466 46 4 36.609534 4 25 C 4 13.390466 13.390466 4 25 4 z M 32.990234 15.986328 A 1.0001 1.0001 0 0 0 32.292969 16.292969 L 25 23.585938 L 17.707031 16.292969 A 1.0001 1.0001 0 0 0 16.990234 15.990234 A 1.0001 1.0001 0 0 0 16.292969 17.707031 L 23.585938 25 L 16.292969 32.292969 A 1.0001 1.0001 0 1 0 17.707031 33.707031 L 25 26.414062 L 32.292969 33.707031 A 1.0001 1.0001 0 1 0 33.707031 32.292969 L 26.414062 25 L 33.707031 17.707031 A 1.0001 1.0001 0 0 0 32.990234 15.986328 z"></path>
         </svg>
-    </Link>
+        </Link>
 
     </div>
     <div class="services-container bg-amber-50 flex items-center justify-center flex-col">
-        <div class="services-grid">
+        <div class="services-grid flex items-center justify-center flex-row flex-wrap gap-4">
             <div
                 v-for="service in services"
                 :key="service.id"
-                class="service-card"
+                class="service-card w-80"
             >
                 <div class="service-header">
                     <h2>{{ service.name.toUpperCase() }}</h2>
@@ -21,8 +22,11 @@
                 </div>
 
                 <div class="service-content">
-                    <img class="icon-wrapper object-cover" :src="service.image_url" alt="">
-                    <p>{{ service.description }}</p>
+                    <img v-if="service.image_data"
+                         :src="'data:image/jpeg;base64,' + service.image_data"
+                         class="icon-wrapper object-cover"
+                         alt="Service Image">
+                    <p class="overflow-y-auto h-32">{{ service.description }}</p>
                 </div>
 
                 <div class="service-actions">
@@ -32,7 +36,7 @@
             </div>
         </div>
 
-        <Link :href="route('admin.services.create')" class="add-btn">Ավելացնել ծառայություն</Link>
+        <Link :href="route('admin.services.create')" class="add-btn rounded-md">Ավելացնել ծառայություն</Link>
 
         <!-- Delete Confirmation Modal -->
         <div v-if="showDeleteModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
@@ -113,14 +117,6 @@ body {
     position: relative;
 }
 
-.services-grid {
-    max-width: 1200px;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-    gap: 2rem;
-    margin-bottom: 2rem;
-    width: 100%;
-}
 
 .service-card {
     border: 1px solid #e0e0e0;

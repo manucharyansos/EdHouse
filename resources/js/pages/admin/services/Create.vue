@@ -14,9 +14,10 @@
 
                 <form @submit.prevent="submitForm" class="space-y-6" enctype="multipart/form-data">
                     <div>
-                        <label for="svg" class="block text-sm font-medium text-gray-700">SVG</label>
+                        <label for="image" class="block text-sm font-medium text-gray-700">Նկար</label>
                         <input
-                            id="svg"
+                            id="image"
+                            name="image"
                             @change="onFileChange"
                             required
                             type="file"
@@ -51,7 +52,7 @@
                         <button
                             type="button"
                             @click="cancel"
-                            class="px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                            class="px-4 py-2 border cursor-pointer border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                         >
                             Չեղարկել
                         </button>
@@ -77,14 +78,13 @@ import HeaderComponent from '@/components/HeaderComponent.vue';
 import FooterComponent from '@/components/FooterComponent.vue';
 
 const form = useForm({
-    svg: null,
+    image: null,
     name: '',
     description: '',
 });
 
 const onFileChange = (event) => {
-    form.svg = event.target.files[0];
-    console.log('Selected file:', form.svg);
+    form.image = event.target.files[0];
 };
 
 const submitForm = () => {
@@ -97,6 +97,6 @@ const submitForm = () => {
 
 const cancel = () => {
     form.reset();
-    window.location.href = '/admin/services';
+    form.get('/services/admin');
 };
 </script>

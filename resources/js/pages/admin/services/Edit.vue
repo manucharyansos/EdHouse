@@ -11,18 +11,21 @@
         <form @submit.prevent="submitForm" class="space-y-6" enctype="multipart/form-data">
             <!-- SVG File Input -->
             <div>
-                <img v-if="currentSvg" :src="'/storage/' + currentSvg" alt="Current SVG" class="mt-2 h-16 w-16 object-contain" />
-                <label for="svg" class="block text-sm font-medium text-gray-700 mb-1">Պատկեր</label>
+                <img v-if="form.image_data || service.image_url"
+                     :src="form.image_data || service.image_url"
+                     class="h-48 w-full object-cover rounded-lg mb-2" alt="">
+
+                <label for="image" class="block text-sm font-medium text-gray-700 mb-1">Պատկեր</label>
                 <input
-                    id="svg"
+                    id="image"
                     type="file"
+                    name="image"
                     accept="image/jpeg,image/png,image/jpg,image/svg+xml"
                     @change="handleFileChange"
                     class="w-full px-4 py-2 bg-neutral-700 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    :class="{ 'border-red-500': form.errors.svg }"
+                    :class="{ 'border-red-500': form.errors.image }"
                 />
-                <p v-if="form.svg" class="text-sm text-gray-500 mt-1">Ընթացիկ SVG: {{ form.svg }}</p>
-                <p v-if="form.errors.svg" class="text-red-500 text-sm mt-1">{{ form.errors.svg }}</p>
+                <p v-if="form.errors.image" class="text-red-500 text-sm mt-1">{{ form.errors.image }}</p>
             </div>
 
             <!-- Name Input -->
@@ -82,7 +85,7 @@ import { ref } from 'vue';
 
 interface Service {
     id: number;
-    svg: string;
+    image: string;
     name: string;
     description: string;
 }
@@ -91,10 +94,10 @@ const props = defineProps<{
     service: Service;
 }>();
 
-const currentSvg = ref(props.service.svg);
+const currentSvg = ref(props.service.image);
 
 const form = useForm({
-    svg: null as File | null,
+    image: null as File | null,
     name: props.service.name,
     description: props.service.description,
     _method: 'PUT' // Laravel's method spoofing for PUT requests
@@ -104,8 +107,8 @@ const submitForm = () => {
     form.post(`/admin/services/${props.service.id}`, {
         onSuccess: () => {
             form.reset();
-            if (form.svg) {
-                currentSvg.value = form.svg;
+            if (form.image) {
+                currentSvg.value = form.image;
             }
         },
         forceFormData: true,
@@ -116,12 +119,12 @@ const submitForm = () => {
 const handleFileChange = (event: Event) => {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
-        form.svg = input.files[0];
+        form.image = input.files[0];
     }
 };
 
 const cancel = () => {
     form.reset();
-    form.get('/admin/services');
+    form.get('/services/admin');
 };
 </script>
