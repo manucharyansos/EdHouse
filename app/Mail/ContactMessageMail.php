@@ -20,6 +20,7 @@ class ContactMessageMail extends Mailable
     public function build()
     {
         return $this->subject('Նոր հաղորդագրություն կայքից')
+            ->replyTo($this->data['email'])
             ->view('emails.contact-message')
             ->with('data', $this->data);
     }

@@ -16,18 +16,16 @@ class DatabaseSeeder extends Seeder
     {
 
         User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+            'name' => 'Admin',
+            'email' => 'admin@example.com',
             'password' => Hash::make('password'),
+            'is_admin' => true
         ]);
+
 
         $this->call([
             ProjectCategorySeeder::class,
-        ]);
-        $this->call([
             NewsSeeder::class,
-        ]);
-        $this->call([
             ServicesSeeder::class,
         ]);
     }

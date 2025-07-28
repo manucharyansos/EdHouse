@@ -1,29 +1,22 @@
 <template>
+    <Head title="Ծառայություններ" />
+    <AppLayout>
     <div class="max-w-2xl mx-auto p-6 mt-20 bg-white shadow-md rounded-lg">
-        <div class="absolute top-2 right-5">
-            <Link :href="route('admin')">
-                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="30" fill="red" viewBox="0 0 50 50">
-                    <path d="M 25 2 C 12.309534 2 2 12.309534 2 25 C 2 37.690466 12.309534 48 25 48 C 37.690466 48 48 37.690466 48 25 C 48 12.309534 37.690466 2 25 2 z M 25 4 C 36.609534 4 46 13.390466 46 25 C 46 36.609534 36.609534 46 25 46 C 13.390466 46 4 36.609534 4 25 C 4 13.390466 13.390466 4 25 4 z M 32.990234 15.986328 A 1.0001 1.0001 0 0 0 32.292969 16.292969 L 25 23.585938 L 17.707031 16.292969 A 1.0001 1.0001 0 0 0 16.990234 15.990234 A 1.0001 1.0001 0 0 0 16.292969 17.707031 L 23.585938 25 L 16.292969 32.292969 A 1.0001 1.0001 0 1 0 17.707031 33.707031 L 25 26.414062 L 32.292969 33.707031 A 1.0001 1.0001 0 1 0 33.707031 32.292969 L 26.414062 25 L 33.707031 17.707031 A 1.0001 1.0001 0 0 0 32.990234 15.986328 z"></path>
-                </svg>
-            </Link>
-        </div>
         <h1 class="text-2xl font-bold text-gray-800 mb-6 text-center">Խմբագրել ծառայություն</h1>
         <form @submit.prevent="submitForm" class="space-y-6" enctype="multipart/form-data">
             <!-- SVG File Input -->
             <div>
-                <img v-if="form.image_data || service.image_url"
-                     :src="form.image_data || service.image_url"
-                     class="h-48 w-full object-cover rounded-lg mb-2" alt="">
+                <img v-if="imagePreview || service.image_url"
+                     :src="imagePreview || service.image_url"
+                     class="h-48 w-full object-cover rounded-lg mb-2"
+                     alt="Service Image">
 
-                <label for="image" class="block text-sm font-medium text-gray-700 mb-1">Պատկեր</label>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Պատկեր</label>
                 <input
-                    id="image"
                     type="file"
-                    name="image"
-                    accept="image/jpeg,image/png,image/jpg,image/svg+xml"
+                    accept="image/*"
                     @change="handleFileChange"
-                    class="w-full px-4 py-2 bg-neutral-700 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    :class="{ 'border-red-500': form.errors.image }"
+                    class="w-full px-4 py-2 border rounded-md"
                 />
                 <p v-if="form.errors.image" class="text-red-500 text-sm mt-1">{{ form.errors.image }}</p>
             </div>
@@ -77,54 +70,50 @@
             </div>
         </form>
     </div>
+    </AppLayout>
 </template>
 
-<script setup lang="ts">
-import { Link, useForm } from '@inertiajs/vue3';
+<script setup>
+import { Head, useForm } from '@inertiajs/vue3';
 import { ref } from 'vue';
+import AppLayout from '@/layouts/AppLayout.vue';
 
-interface Service {
-    id: number;
-    image: string;
-    name: string;
-    description: string;
-}
+const props = defineProps({
+    service: Object
+});
 
-const props = defineProps<{
-    service: Service;
-}>();
-
-const currentSvg = ref(props.service.image);
+const imagePreview = ref(null);
 
 const form = useForm({
-    image: null as File | null,
+    image: null,
     name: props.service.name,
     description: props.service.description,
-    _method: 'PUT' // Laravel's method spoofing for PUT requests
+    _method: 'PUT'
 });
+
+const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    form.image = file;
+
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+            imagePreview.value = event.target.result;
+        };
+        reader.readAsDataURL(file);
+    } else {
+        imagePreview.value = null;
+    }
+};
 
 const submitForm = () => {
     form.post(`/admin/services/${props.service.id}`, {
-        onSuccess: () => {
-            form.reset();
-            if (form.image) {
-                currentSvg.value = form.image;
-            }
-        },
         forceFormData: true,
         preserveScroll: true,
     });
 };
 
-const handleFileChange = (event: Event) => {
-    const input = event.target as HTMLInputElement;
-    if (input.files && input.files.length > 0) {
-        form.image = input.files[0];
-    }
-};
-
 const cancel = () => {
-    form.reset();
-    form.get('/services/admin');
+    window.history.back();
 };
 </script>

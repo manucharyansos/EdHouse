@@ -10,7 +10,7 @@
                 <div class="flex flex-col items-center py-8 sm:py-12 justify-center md:flex-row bg-white rounded-lg shadow-md overflow-hidden">
                     <!-- Image -->
                     <div class="w-full md:w-1/2 h-64 md:h-96 object-cover">
-                        <img :src="service.image_url" :alt="service.name" class="w-full h-full object-cover">
+                        <img :src="'data:image/jpeg;base64,' + service.image_data" :alt="service.name" class="w-full h-full object-cover">
                     </div>
 
                     <!-- Text content -->

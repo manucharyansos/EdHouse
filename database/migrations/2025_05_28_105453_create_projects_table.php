@@ -17,7 +17,8 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->string('location');
             $table->string('architect');
-            $table->string('image')->nullable();
+            $table->longText('image_data')->nullable();
+            $table->string('image_type')->nullable();
             $table->timestamps();
         });
     }

@@ -10,40 +10,32 @@ import AppLogo from './AppLogo.vue';
 
 const mainNavItems: NavItem[] = [
     {
-        title: 'Admin',
+        title: 'Ադմին',
         href: '/admin',
         icon: LayoutGrid,
     },
     {
-        title: 'History',
+        title: 'Պատմություն',
+        href: '/admin/history',
         icon: BookOpen,
-        items: [
-            {
-                title: 'History Page',
-                href: '/admin/history',
-            },
-            {
-                title: 'Create History',
-                href: '/admin/about/create',
-            },
-        ],
     },
     {
-        title: 'Services',
+        title: 'Խառայություններ',
+        href: '/admin/services/admin',
         icon: Folder,
-        items: [
-            {
-                title: 'Services Page',
-                href: '/admin/services/admin',
-            },
-            {
-                title: 'Create Services',
-                href: '/admin/services/create',
-            },
-        ],
     },
     {
-        title: 'Contact Messages',
+        title: 'Պռոեկտներ',
+        href: '/admin/projects',
+        icon: Folder,
+    },
+    {
+        title: 'Նորություններ',
+        href: '/admin/news',
+        icon: LayoutGrid,
+    },
+    {
+        title: 'Կոնտակտային հաղորդագրություններ',
         href: '/admin/contact-messages',
         icon: LayoutGrid,
     },

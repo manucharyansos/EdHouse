@@ -1,4 +1,6 @@
 <template>
+    <Head title="Պատմություն" />
+    <AppLayout>
         <div class="container mx-auto px-4 py-8">
             <div class="max-w-3xl mx-auto">
                 <h1 class="text-3xl font-bold text-gray-800 mb-8">Խմբագրել պատմության կետ</h1>
@@ -84,10 +86,12 @@
                 </form>
             </div>
         </div>
+        </AppLayout>
 </template>
 
 <script setup>
-import { Link, useForm } from '@inertiajs/vue3';
+import { Head, Link, useForm } from '@inertiajs/vue3';
+import AppLayout from '@/layouts/AppLayout.vue';
 
 const props = defineProps({
     history: Object
@@ -117,4 +121,14 @@ const submitForm = () => {
         }
     });
 };
+const confirmDelete = (id) => {
+    if (confirm('Դուք վստահ եք, որ ցանկանում եք ջնջել այս տարրը?')) {
+        router.delete(route('admin.history.destroy', id), {
+            preserveScroll: true,
+            onSuccess: () => {
+                console.log('Ջնջված է');
+            }
+        });
+    }
+}
 </script>

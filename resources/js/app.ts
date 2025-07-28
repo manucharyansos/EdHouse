@@ -7,6 +7,7 @@ import { createApp, h } from 'vue';
 import { ZiggyVue } from 'ziggy-js';
 import { initializeTheme } from './composables/useAppearance';
 import 'leaflet/dist/leaflet.css';
+import Notifications from '@kyvg/vue3-notification'
 
 // Extend ImportMeta interface for Vite...
 declare module 'vite/client' {
@@ -30,12 +31,12 @@ createInertiaApp({
         createApp({ render: () => h(App, props) })
             .use(plugin)
             .use(ZiggyVue)
+            .use(Notifications)
             .mount(el);
     },
     progress: {
         color: '#4B5563',
     },
-});
+})
 
-// This will set light / dark mode on page load...
 initializeTheme();

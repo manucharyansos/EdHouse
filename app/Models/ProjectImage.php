@@ -3,25 +3,18 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Support\Facades\Storage;
 
 class ProjectImage extends Model
 {
-    protected $fillable = ['project_id', 'url'];
+    protected $fillable = ['project_id', 'image_data', 'image_type'];
 
     protected $appends = ['image_url'];
 
-    public function project(): BelongsTo
+    public function getImageUrlAttribute(): string
     {
-        return $this->belongsTo(Project::class);
-    }
-
-    public function getImageUrlAttribute(): ?string
-    {
-        if ($this->image && Storage::disk('public')->exists($this->image)) {
-            return url('storage/' . $this->image);
+        if ($this->image_data && $this->image_type) {
+            return "data:image/{$this->image_type};base64,{$this->image_data}";
         }
-        return asset('images/default-service.jpg');
+        return asset('images/default-image.jpg');
     }
 }

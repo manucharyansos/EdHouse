@@ -11,7 +11,7 @@ use Inertia\Inertia;
 class HistoryController extends Controller
 {
     /**
-     * Display the history section on About page.
+     * Show history section on public About page.
      */
     public function index(): \Inertia\Response
     {
@@ -27,8 +27,9 @@ class HistoryController extends Controller
             'sections' => $sections,
         ]);
     }
+
     /**
-     * Display the history section on About page.
+     * Admin index.
      */
     public function adminIndex(): \Inertia\Response
     {
@@ -40,7 +41,7 @@ class HistoryController extends Controller
     }
 
     /**
-     * Show the form for creating a new history item (admin only).
+     * Show create form.
      */
     public function create(): \Inertia\Response
     {
@@ -48,29 +49,28 @@ class HistoryController extends Controller
     }
 
     /**
-     * Store a newly created history item (admin only).
+     * Store new history.
      */
     public function store(Request $request): RedirectResponse
     {
-        $request->validate([
+        $validated = $request->validate([
             'year' => 'required|integer',
             'title' => 'required|string|max:255',
             'content' => 'required|string',
             'image' => 'required|image|max:2048',
         ]);
 
-        $data = $request->only(['year', 'title', 'content', 'image']);
-
         if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image')->store('history_images', 'public');
+            $validated['image'] = $request->file('image')->store('history_images', 'public');
         }
 
-        History::create($data);
+        History::create($validated);
 
-        return redirect()->route('about')->with('success', 'History item created successfully.');
+        return redirect()->route('admin.history.index')->with('success', 'Պատմությունը ավելացվեց։');
     }
+
     /**
-     * Show the form for editing a history item (admin only).
+     * Show edit form.
      */
     public function edit(History $history): \Inertia\Response
     {
@@ -80,33 +80,31 @@ class HistoryController extends Controller
     }
 
     /**
-     * Update the specified history item (admin only).
+     * Update history.
      */
     public function update(Request $request, History $history): RedirectResponse
     {
-        $request->validate([
+        $validated = $request->validate([
             'year' => 'required|integer',
             'title' => 'required|string|max:255',
             'content' => 'required|string',
             'image' => 'nullable|image|max:2048',
         ]);
 
-        $data = $request->all();
-
         if ($request->hasFile('image')) {
             if ($history->image) {
                 Storage::disk('public')->delete($history->image);
             }
-            $data['image'] = $request->file('image')->store('history_images', 'public');
+            $validated['image'] = $request->file('image')->store('history_images', 'public');
         }
 
-        $history->update($data);
+        $history->update($validated);
 
-        return redirect()->route('admin/history/index')->with('success', 'History item updated successfully.');
+        return redirect()->route('admin.history.index')->with('success', 'Պատմությունը թարմացվեց։');
     }
 
     /**
-     * Remove the specified history item (admin only).
+     * Delete.
      */
     public function destroy(History $history): RedirectResponse
     {
@@ -116,6 +114,6 @@ class HistoryController extends Controller
 
         $history->delete();
 
-        return redirect()->route('about.index')->with('success', 'History item deleted successfully.');
+        return redirect()->route('admin.history.index')->with('success', 'Պատմությունը ջնջվեց։');
     }
 }

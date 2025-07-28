@@ -11,7 +11,8 @@ class CreateProjectImagesTable extends Migration
         Schema::create('project_images', function (Blueprint $table) {
             $table->id();
             $table->foreignId('project_id')->constrained()->onDelete('cascade');
-            $table->string('url');
+            $table->longText('image_data')->nullable();
+            $table->string('image_type')->nullable();
             $table->timestamps();
         });
     }

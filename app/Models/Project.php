@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Project extends Model
 {
-    protected $fillable = ['name', 'description', 'location', 'architect', 'image'];
+    protected $fillable = ['name', 'description', 'location', 'architect', 'image_data', 'image_type'];
 
     protected $appends = ['image_url'];
 
@@ -22,12 +22,11 @@ class Project extends Model
         return $this->hasMany(ProjectImage::class);
     }
 
-    public function getImageUrlAttribute(): ?string
+    public function getImageUrlAttribute(): string
     {
-        if ($this->image && file_exists(public_path('storage/app/public/' . $this->image))) {
-            return url('storage/app/public/' . $this->image);
+        if ($this->image_data && $this->image_type) {
+            return "data:image/{$this->image_type};base64,{$this->image_data}";
         }
-        return asset('images/default-service.jpg');
+        return asset('images/default-project.jpg');
     }
-
 }

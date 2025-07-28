@@ -34,7 +34,7 @@
         <div v-for="service in services" :key="service.id">
             <ServicesCard
                 :paragraph="service.name"
-                :img-url="service.image_url"
+                :img-url="'data:image/jpeg;base64,' + service.image_data"
                 :text="service.description"
                 classes="bg-zinc-800 h-full"
                 @readMore="toRemodeling(service)"
@@ -116,24 +116,29 @@
                     :items-to-show="4"
                     aria-multiline="true"
                     :wrap-around="true"
-                    :breakpoints="breakpoints"
+                    :breakpoints="{
+            320: { itemsToShow: 1 },
+            640: { itemsToShow: 2 },
+            768: { itemsToShow: 3 },
+            1024: { itemsToShow: 4 }
+        }"
                     :autoplay="3000"
                     class="w-full"
                 >
-                    <Slide v-for="project in filteredProjects" :key="project.id">
+                    <Slide v-for="project in filteredProjects" :key="project.id" class=" w-96">
                         <Link :href="route('projects.show', { project: project.id })">
-                            <div class="carousel__item">
-                                <div class="project-card relative bg-white shadow-lg overflow-hidden cursor-pointer">
-                                    <img
-                                        :src="project.image_url || '/img/default-project.jpg'"
-                                        :alt="project.name"
-                                        class="project-image w-full"
-                                    />
-                                    <div class="project-content absolute top-0 z-10 p-5">
-                                        <h3 class="text-lg font-bold italic font-sans">{{ project.name }}</h3>
-                                        <p class="mt-2 line-clamp-2 text-gray-200 text-center">{{ project.description }}</p>
-                                        <div class="mt-4 flex flex-wrap gap-2">
-                                        </div>
+                            <div class="carousel__item px-2">
+                                <div class="project-card relative bg-white shadow-lg overflow-hidden cursor-pointer h-full">
+                                    <div class="aspect-w-16 aspect-h-9">
+                                        <img
+                                            :src="project.image_url"
+                                            :alt="project.name"
+                                            class="project-image w-80 h-full object-cover"
+                                        />
+                                    </div>
+                                    <div class="project-content absolute top-0 left-0 right-0 bottom-0 z-10 p-5 flex flex-col justify-end bg-gradient-to-t from-black/80 to-transparent">
+                                        <h3 class="text-lg font-bold italic font-sans text-white">{{ project.name }}</h3>
+                                        <p class="mt-2 line-clamp-2 text-gray-200">{{ project.description }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -143,7 +148,7 @@
 
                 <button
                     @click="carouselPrev"
-                    class="p-2 bg-white rounded-full shadow hover:bg-gray-100 text-black absolute top-1/2 z-10 left-5 cursor-pointer transform -translate-y-1/2"
+                    class="p-2 bg-white rounded-full shadow hover:bg-gray-100 text-black absolute top-1/2 z-10 left-5 cursor-pointer transform -translate-y-1/2 hidden sm:block"
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
@@ -151,7 +156,7 @@
                 </button>
                 <button
                     @click="carouselNext"
-                    class="p-2 bg-white rounded-full shadow hover:bg-gray-100 text-black absolute top-1/2 z-10 right-5 cursor-pointer transform -translate-y-1/2"
+                    class="p-2 bg-white rounded-full shadow hover:bg-gray-100 text-black absolute top-1/2 z-10 right-5 cursor-pointer transform -translate-y-1/2 hidden sm:block"
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
@@ -181,16 +186,33 @@
         <h2 class="text-2xl md:text-5xl font-bold text-black text-center mb-12">
             Ընկերության նորություններ
         </h2>
-        <div class="flex justify-center mb-8">
-        </div>
         <div class="max-w-7xl mx-auto">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <NewsCard
-                    :news-data="news"
-                />
+                <div
+                    v-for="item in news"
+                    :key="item.id"
+                    class="bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition duration-300"
+                >
+                    <img
+                        v-if="item.image"
+                        :src="'/storage/' + item.image"
+                        :alt="item.title"
+                        class="w-full h-48 object-cover rounded-t-lg mb-4"
+                    />
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2 line-clamp-2">
+                        {{ item.title }}
+                    </h3>
+                    <p class="text-sm text-gray-600 mb-2">
+                        {{ new Date(item.published_at).toLocaleDateString('hy-AM', { year: 'numeric', month: 'long', day: 'numeric' }) }}
+                    </p>
+                    <p class="text-gray-700 text-sm line-clamp-3">
+                        {{ item.content }}
+                    </p>
+                </div>
             </div>
         </div>
     </div>
+
 
     <!-- Footer Section -->
     <FooterComponent class="z-50" />
