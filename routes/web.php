@@ -59,7 +59,7 @@ Route::middleware(['auth', 'admin', 'verified'])->prefix('admin')->group(functio
     Route::get('/news/create', [NewsController::class, 'create'])->name('admin.news.create');
     Route::post('/news', [NewsController::class, 'store'])->name('admin.news.store');
     Route::get('/news/{news}/edit', [NewsController::class, 'edit'])->name('admin.news.edit');
-    Route::put('/news/{news}', [NewsController::class, 'update'])->name('admin.news.update');
+    Route::post('/news/{news}', [NewsController::class, 'update'])->name('admin.news.update');
     Route::delete('/news/{news}', [NewsController::class, 'destroy'])->name('admin.news.destroy');
     Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create');
     Route::post('/categories', [CategoryController::class, 'store'])->name('categories.store');

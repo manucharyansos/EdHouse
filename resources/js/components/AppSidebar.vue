@@ -5,8 +5,9 @@ import NavUser from '@/components/NavUser.vue';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/vue3';
-import { BookOpen, Folder, LayoutGrid } from 'lucide-vue-next';
+import { AirplayIcon, BookOpen, Folder, Key, LayoutGrid, ProjectorIcon, QuoteIcon } from 'lucide-vue-next';
 import AppLogo from './AppLogo.vue';
+import { Projection } from 'leaflet';
 
 const mainNavItems: NavItem[] = [
     {
@@ -17,22 +18,22 @@ const mainNavItems: NavItem[] = [
     {
         title: 'Պատմություն',
         href: '/admin/history',
-        icon: BookOpen,
+        icon: ProjectorIcon,
     },
     {
-        title: 'Խառայություններ',
+        title: 'Ծառայություններ',
         href: '/admin/services/admin',
-        icon: Folder,
+        icon: QuoteIcon,
     },
     {
         title: 'Պռոեկտներ',
         href: '/admin/projects',
-        icon: Folder,
+        icon: Key,
     },
     {
         title: 'Նորություններ',
         href: '/admin/news',
-        icon: LayoutGrid,
+        icon: ProjectorIcon,
     },
     {
         title: 'Կոնտակտային հաղորդագրություններ',

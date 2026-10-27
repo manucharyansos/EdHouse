@@ -36,17 +36,20 @@ class NewsController extends Controller
             'title' => 'required|string|max:255',
             'content' => 'required|string',
             'published_at' => 'required|date',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ]);
 
         if ($request->hasFile('image')) {
-            $validated['image'] = $request->file('image')->store('news_images', 'public');
+            $imageFile = $request->file('image');
+            $validated['image_data'] = base64_encode(file_get_contents($imageFile->path()));
+            $validated['image_type'] = $imageFile->getClientOriginalExtension();
         }
 
         News::create($validated);
 
         return redirect()->route('admin.news.index')->with('success', 'Նորությունը ավելացվել է։');
     }
+
 
     public function edit(News $news): Response
     {
@@ -61,15 +64,13 @@ class NewsController extends Controller
             'title' => 'required|string|max:255',
             'content' => 'required|string',
             'published_at' => 'required|date',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ]);
 
         if ($request->hasFile('image')) {
-            if ($news->image) {
-                Storage::disk('public')->delete($news->image);
-            }
-
-            $validated['image'] = $request->file('image')->store('news_images', 'public');
+            $imageFile = $request->file('image');
+            $validated['image_data'] = base64_encode(file_get_contents($imageFile->path()));
+            $validated['image_type'] = $imageFile->getClientOriginalExtension();
         }
 
         $news->update($validated);
@@ -77,10 +78,12 @@ class NewsController extends Controller
         return redirect()->route('admin.news.index')->with('success', 'Նորությունը թարմացվել է։');
     }
 
+
     public function destroy(News $news): RedirectResponse
     {
         if ($news->image) {
-            Storage::disk('public')->delete($news->image);
+            $path = str_replace('/storage/', '', $news->image);
+            Storage::disk('public')->delete($path);
         }
 
         $news->delete();

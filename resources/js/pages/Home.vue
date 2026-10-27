@@ -194,8 +194,8 @@
                     class="bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition duration-300"
                 >
                     <img
-                        v-if="item.image"
-                        :src="'/storage/' + item.image"
+                        v-if="item.image_data"
+                        :src="'data:image/' + item.image_type + ';base64,' + item.image_data"
                         :alt="item.title"
                         class="w-full h-48 object-cover rounded-t-lg mb-4"
                     />

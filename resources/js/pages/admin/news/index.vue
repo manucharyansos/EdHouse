@@ -31,7 +31,12 @@
                             <td class="px-4 py-3 truncate max-w-xs">{{ item.content }}</td>
                             <td class="px-4 py-3">{{ new Date(item.published_at).toLocaleDateString() }}</td>
                             <td class="px-4 py-3">
-                                <img v-if="item.image" :src="`/storage/${item.image}`" class="h-12 w-12 object-cover rounded"  alt=""/>
+                                <img
+                                    v-if="item.image_data"
+                                    :src="'data:image/' + item.image_type + ';base64,' + item.image_data"
+                                    :alt="item.title"
+                                    class="w-full h-48 object-cover rounded-t-lg mb-4"
+                                />
                             </td>
                             <td class="px-4 py-3 space-x-2">
                                 <Link :href="route('admin.news.edit', item.id)" class="text-blue-400 hover:underline">Խմբագրել</Link>

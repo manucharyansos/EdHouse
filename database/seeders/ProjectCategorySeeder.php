@@ -18,18 +18,18 @@ class ProjectCategorySeeder extends Seeder
         ];
 
         $placeholderImages = [
-            'images/project-01-420x357.jpg',
-            'images/project-02-420x357.jpg',
-            'images/project-03-420x357.jpg',
-            'images/project-04-420x357.jpg',
-            'images/project-05-420x357.jpg',
+            'project-01-420x357.jpg',
+            'project-02-420x357.jpg',
+            'project-03-420x357.jpg',
+            'project-04-420x357.jpg',
+            'project-05-420x357.jpg',
         ];
 
         $galleryImages = [
-            'images/project-01-420x357.jpg',
-            'images/project-02-420x357.jpg',
-            'images/project-03-420x357.jpg',
-            'images/project-04-420x357.jpg',
+            'project-01-420x357.jpg',
+            'project-02-420x357.jpg',
+            'project-03-420x357.jpg',
+            'project-04-420x357.jpg',
         ];
 
         $locations = [
@@ -48,7 +48,7 @@ class ProjectCategorySeeder extends Seeder
             $category = ProjectsCategories::create($categoryData);
 
             for ($i = 1; $i <= 5; $i++) {
-                $imagePath = public_path($placeholderImages[$i - 1]);
+                $imagePath = base_path('images/' . $placeholderImages[$i - 1]);
                 $imageData = base64_encode(file_get_contents($imagePath));
                 $imageType = pathinfo($imagePath, PATHINFO_EXTENSION);
 
@@ -62,7 +62,7 @@ class ProjectCategorySeeder extends Seeder
                 ]);
 
                 foreach ($galleryImages as $galleryImage) {
-                    $galleryPath = public_path($galleryImage);
+                    $galleryPath = base_path('images/' . $galleryImage);
                     $galleryData = base64_encode(file_get_contents($galleryPath));
                     $galleryType = pathinfo($galleryPath, PATHINFO_EXTENSION);
 

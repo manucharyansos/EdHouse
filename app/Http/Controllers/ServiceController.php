@@ -34,45 +34,23 @@ class ServiceController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'required|string',
-            'location' => 'required|string|max:255',
-            'architect' => 'required|string|max:255',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'category_ids' => 'required|array',
-            'category_ids.*' => 'exists:projects_categories,id',
-            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        // Գլխավոր նկարը՝ base64
-        $mainFile = $request->file('image');
-        $mainImageData = base64_encode(file_get_contents($mainFile->path()));
-        $mainImageType = $mainFile->getClientOriginalExtension();
+        $imageFile = $request->file('image');
+        $imageData = base64_encode(file_get_contents($imageFile->path()));
+        $imageType = $imageFile->getClientOriginalExtension();
 
-        $project = Project::create([
-            'name' => $request->name,
-            'description' => $request->description,
-            'location' => $request->location,
-            'architect' => $request->architect,
-            'image_data' => $mainImageData,
-            'image_type' => $mainImageType,
+        Service::create([
+            'name' => $validated['name'],
+            'description' => $validated['description'],
+            'image_data' => $imageData,
+            'image_type' => $imageType,
         ]);
 
-        $project->categories()->sync($request->category_ids ?? []);
-
-        // Լրացուցիչ նկարներ
-        if ($request->hasFile('images')) {
-            foreach ($request->file('images') as $image) {
-                $extraData = base64_encode(file_get_contents($image->path()));
-                $extraType = $image->getClientOriginalExtension();
-
-                $project->images()->create([
-                    'image_data' => $extraData,
-                    'image_type' => $extraType
-                ]);
-            }
-        }
-
-        return redirect()->route('projects.index')->with('success', 'Նախագիծը հաջողությամբ ավելացվել է');
+        return redirect()->route('admin.services.index')->with('success', 'Ծառայությունը հաջողությամբ ավելացվել է');
     }
+
 
 
     public function update(Request $request, $id): RedirectResponse
